@@ -34,7 +34,7 @@ def printH(head, value):
     print(head, end=' ')
     print(value)
 
-
+"""
 if not config.useMindPlus:
     import tkinter as tk
     import tkinter.messagebox
@@ -49,7 +49,7 @@ if not config.useMindPlus:
         return language.get(key, textEN[key])
 
     # printH("txt('lan'):", txt('lan'))
-
+"""
 
 printH("ardSerial date: ", "Feb 2, 2024")
 
@@ -483,7 +483,7 @@ skillFullName = {
          'zz': 'zz',
          }
              
-model = 'Bittle'
+model = 'Nybble'
 postureTable = postureDict[model]
 
 
@@ -712,156 +712,12 @@ def connectPort(PortList, needTesting=True, needSendTask=True):
         print('No port found! Please make sure the serial port can be recognized by the computer first.')
         if not config.useMindPlus:
             print('Replug mode')
-            replug(PortList, needSendTask)
     else:
         logger.info(f"Connect to serial port list:")
         for p in PortList:
             logger.debug(f"datatype of p : {type(p)}")
             logger.info(f"{PortList[p]}")
             portStrList.append(PortList[p])
-                                
-def replug(PortList, needSendTask=True):
-    global timePassed
-    print('Please disconnect and reconnect the device from the COMPUTER side')
-    
-    window = tk.Tk()
-    window.geometry('+800+500')
-    def on_closing():
-        window.destroy()
-        os._exit(0)
-    window.protocol('WM_DELETE_WINDOW', on_closing)
-    window.title(txt('Replug mode'))
-
-    thres = 10 # time out for the manual plug and unplug
-    print('Counting down to manual mode:')
-    
-    def bCallback():
-        labelC.destroy()
-        buttonC.destroy()
-        
-        labelT['text']= txt('Counting down to manual mode: ')
-        labelT.grid(row=0,column=0)
-        
-        label.grid(row=1,column=0)
-        label['text']="{} s".format(thres)
-        countdown(time.time(),copy.deepcopy(Communication.Print_Used_Com()))
-        
-    labelC = tk.Label(window, font='sans 14 bold', justify='left')
-    labelC['text'] = txt('Replug prompt')
-    labelC.grid(row=0, column=0)
-    buttonC = tk.Button(window, text=txt('Confirm'), command=bCallback)
-    buttonC.grid(row=1, column=0, pady=10)
-    labelT = tk.Label(window, font='sans 14 bold')
-    label = tk.Label(window, font='sans 14 bold')
-    def countdown(start,ap):
-        global goodPortCount
-        global timePassed
-        curPorts = copy.deepcopy(Communication.Print_Used_Com())
-
-        if len(curPorts) != len(ap):
-            time.sleep(0.5)    # USB modem serial takes longer time to get ready
-            curPorts = copy.deepcopy(Communication.Print_Used_Com())
-            print(ap)
-            print('---')
-            print(curPorts)
-            if len(curPorts) < len(ap):
-                ap = curPorts
-                start = time.time()
-                timePassed = 0
-            else:
-                dif = list(set(curPorts)-set(ap))
-                dif = deleteDuplicatedUsbSerial(dif)
-                
-                success = False
-                for p in dif:
-                    try:
-                        serialObject = Communication(p, 115200, 1)
-                        portName = p.split('/')[-1]
-                        PortList.update({serialObject: portName})
-                        portStrList.insert(0, portName)  # remove '/dev/' in the port name
-                        goodPortCount += 1
-                        logger.info(f"Connected to serial port: {p}")
-                        tk.messagebox.showinfo(title=txt('Info'), message=txt('New port prompt') + portName)
-                        if needSendTask is True:
-                            time.sleep(2)
-                            result = sendTask(PortList, serialObject, ['?', 0])
-                            getModelAndVersion(result)
-                        
-                        success = True
-                    except Exception as e:
-                        raise e
-                        print("Cannot open {}".format(p))
-
-                if success:
-                    window.destroy()
-                else:
-                    labelT.destroy()
-                    label.destroy()
-                    manualSelect(PortList, window, needSendTask)
-                return
-
-        if time.time() - start > thres:
-            labelT.destroy()
-            label.destroy()
-            manualSelect(PortList, window, needSendTask)
-            return
-        elif (time.time() - start) % 1 < 0.1:
-            print(thres - round(time.time() - start) // 1)
-            label['text'] = "{} s".format((thres - round(time.time() - start) // 1))
-        window.after(100, lambda: countdown(start, ap))
-
-    window.focus_force()  # new window gets focus
-    window.mainloop()
-    
-def selectList(PortList,ls,win, needSendTask=True):
-    
-    global goodPortCount
-    for i in ls.curselection():
-        p = ls.get(i)#.split('/')[-1]
-        try:
-            print(p)
-            print(p.split('/')[-1])
-            serialObject = Communication(p, 115200, 1)
-            PortList.update({serialObject: p.split('/')[-1]})
-            portStrList.append(p.split('/')[-1])
-            goodPortCount += 1
-            logger.info(f"Connected to serial port: {p}")
-            
-            if needSendTask is True:
-                time.sleep(2)
-                result = sendTask(PortList, serialObject, ['?', 0])
-                getModelAndVersion(result)
-            win.destroy()
-
-        except Exception as e:
-            tk.messagebox.showwarning(title=txt('Warning'), message=txt('* Port ') + p + txt(' cannot be opened'))
-            print("Cannot open {}".format(p))
-            raise e
-
-def manualSelect(PortList, window, needSendTask=True):
-    allPorts = deleteDuplicatedUsbSerial(Communication.Print_Used_Com())
-    window.title(txt('Manual mode'))
-    l1 = tk.Label(window, font = 'sans 14 bold')
-    l1['text'] = txt('Manual mode')
-    l1.grid(row=0,column = 0)
-    l2 = tk.Label(window, font='sans 14 bold')
-    l2["text"]=txt('Please select the port from the list')
-    l2.grid(row=1,column=0)
-    ls = tk.Listbox(window,selectmode="multiple")
-    ls.grid(row=2,column=0)
-    def refreshBox(ls):
-        allPorts = deleteDuplicatedUsbSerial(Communication.Print_Used_Com())
-        ls.delete(0,tk.END)
-        for p in allPorts:
-            ls.insert(tk.END,p)
-    for p in allPorts:
-        ls.insert(tk.END,p)
-    bu = tk.Button(window, text=txt('OK'), command=lambda:selectList(PortList, ls, window, needSendTask))
-    bu.grid(row=2, column=1)
-    bu2 = tk.Button(window, text=txt('Refresh'), command=lambda:refreshBox(ls))
-    bu2.grid(row=1, column=1)
-    tk.messagebox.showwarning(title=txt('Warning'), message=txt('Manual mode'))
-    window.mainloop()
 
 def readFromSerial(port):
     print(port)
