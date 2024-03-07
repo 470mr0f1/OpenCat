@@ -145,7 +145,7 @@ def getUltrasonicDistance():
         distance = recString[2:]    # 4.03
         return distance
     else:
-        return -1
+        return ""
 
 
 if __name__ == '__main__':
@@ -314,7 +314,7 @@ if __name__ == '__main__':
         while True:
             # get ultrasonic distance
             distance = getUltrasonicDistance()
-            if distance != -1:
+            if distance != "":
                 if distance <= 5:
                     send(goodPorts, ['C',[127, 0, 0, E_RGB_ALL, E_EFFECT_NONE], 1])
                     send(goodPorts, ['K', sit, 1])
