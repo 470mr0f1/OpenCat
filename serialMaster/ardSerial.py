@@ -720,10 +720,10 @@ def connectPort(PortList, needTesting=True, needSendTask=True):
             portStrList.append(PortList[p])
 
 def readFromSerial(port):
-    print(port)
+    #print(port)
     p = list(port.keys())
-    print(p)
-    print(p[0])
+    #print(p)
+    #print(p[0])
 
     response = p[0].Read_Line().decode("utf-8")
     return response
