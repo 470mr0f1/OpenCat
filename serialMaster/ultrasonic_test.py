@@ -14,66 +14,194 @@ E_EFFECT_ROTATE = 1
 E_EFFECT_FLASH = 2
 E_EFFECT_NONE = 3
 
-# colors for easy use
-rot = ['C',[127, 0, 0, E_RGB_ALL, E_EFFECT_NONE], 1]
-lila = ['C',[127, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
-blau = ['C',[0, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
-gruen = ['C',[0, 127, 0, E_RGB_ALL, E_EFFECT_NONE], 1]
-weiss = ['C',[127, 127, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
 
 # moves for easy use
 
 # don't know what they are doing
 #bd, vtF, vtL, lu, up, zero, stand, wsf
 
-steh = ['kbalance', 1]
-sitz = ['ksit', 1]
-lauf_vorwaerts = ['kwkF', 1]
-lauf_links = ['kwkL', 1]
-lauf_rechts = ['kwkR', 1]
-lauf_rueckwaerts = ['kbk', 1]
-lauf_rueckwaerts_links = ['kbkL', 1]
-lauf_rueckwaerts_rechts = ['kbkR', 1]
-popo_hoch = ['kbuttUp', 1]
-auf_knien = ['kcalib', 1]
-krabbel_vorwaerts = ['kcrF', 1]
-krabbel_links = ['kcrL', 1]
-krabbel_links = ['kcrR', 1]
-renn_vorwaerts = ['ktrF', 1]
-renn_links = ['ktrL', 1]
-renn_rechts = ['ktrR', 1]
-hinten_knien = ['kdropped', 1]
-vorne_hoch = ['klifted', 1]
-ausruhen = ['krest', 1]
-strecken = ['kstr', 1]
-sauer = ['kang', 1]
-boxen = ['kbx', 1]
-jubeln = ['kchr', 1]
-check = ['kck', 1]
-komm_her = ['kcmh', 1]
-graben = ['kdg', 1]
-gut_gemacht = ['kgdb', 1]
-high_five = ['kfiv', 1]
-handstand = ['khds', 1]
-umarmen = ['khg', 1]
-pipi = ['kpee', 1]
-hand_geben = ['khsk', 1]
-hallo = ['khi', 1]
-haende_hoch = ['khu', 1]
-kick = ['kkc', 1]
-nicken = ['knd', 1]
-tot = ['kpd', 1]
-liegestütze = ['kpu', 1]
-aufstehen = ['krc', 1]
-kratzen = ['kscrh', 1]
-niesen = ['ksnf', 1]
-tisch = ['ktbl', 1]
-kopf_schuetteln = ['kwh', 1]
+def augenfarbe(color, seconds = 1):
+    if color == "rot":
+        send(goodPorts, ['C',[127, 0, 0, E_RGB_ALL, E_EFFECT_NONE], 1])
+    elif color == "lila":
+        send(goodPorts, ['C',[127, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1])
+    elif color == "blau":
+        send(goodPorts, ['C',[0, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1])
+    elif color == "gruen":
+        send(goodPorts, ['C',[0, 127, 0, E_RGB_ALL, E_EFFECT_NONE], 1])
+    elif color == "weiss":
+        send(goodPorts, ['C',[127, 127, 127, E_RGB_ALL, E_EFFECT_NONE], 1])
 
 
+def steh(seconds = 1):
+    send(goodPorts, ['kbalance', seconds])
 
 
+def sitz(seconds = 1):
+    send(goodPorts, ['ksit', seconds])
 
+
+def lauf_vorwaerts(seconds = 1):
+    send(goodPorts, ['kwkF', seconds])
+
+
+def lauf_links(seconds = 1):
+    send(goodPorts, ['kwkL', seconds])
+
+
+def lauf_rechts(seconds = 1):
+    send(goodPorts, ['kwkR', seconds])
+
+
+def lauf_rueckwaerts(seconds = 1):
+    send(goodPorts, ['kbk', seconds])
+
+
+def lauf_rueckwaerts_links(seconds = 1):
+    send(goodPorts, ['kbkL', seconds])
+
+
+def lauf_rueckwaerts_rechts(seconds = 1):
+    send(goodPorts, ['kbkR', seconds])
+
+
+def popo_hoch(seconds = 1):
+    send(goodPorts, ['kbuttUp', seconds])
+
+
+def auf_knien(seconds = 1):
+    send(goodPorts, ['kcalib', seconds])
+
+
+def krabbel_vorwaerts(seconds = 1):
+    send(goodPorts, ['kcrF', seconds])
+
+
+def krabbel_links(seconds = 1):
+    send(goodPorts, ['kcrL', seconds])
+
+
+def krabbel_links(seconds = 1):
+    send(goodPorts, ['kcrR', seconds])
+
+
+def renn_vorwaerts(seconds = 1):
+    send(goodPorts, ['ktrF', seconds])
+
+
+def renn_links(seconds = 1):
+    send(goodPorts, ['ktrL', seconds])
+
+
+def renn_rechts(seconds = 1):
+    send(goodPorts, ['ktrR', seconds])
+
+
+def hinten_knien(seconds = 1):
+    send(goodPorts, ['kdropped', seconds])
+
+
+def vorne_hoch(seconds = 1):
+    send(goodPorts, ['klifted', seconds])
+
+
+def ausruhen(seconds = 1):
+    send(goodPorts, ['krest', seconds])
+
+
+def strecken(seconds = 1):
+    send(goodPorts, ['kstr', seconds])
+
+
+def sauer(seconds = 1):
+    send(goodPorts, ['kang', seconds])
+
+
+def boxen(seconds = 1):
+    send(goodPorts, ['kbx', seconds])
+
+
+def jubeln(seconds = 1):
+    send(goodPorts, ['kchr', seconds])
+
+
+def check(seconds = 1):
+    send(goodPorts, ['kck', seconds])
+
+
+def komm_her(seconds = 1):
+    send(goodPorts, ['kcmh', seconds])
+
+
+def graben(seconds = 1):
+    send(goodPorts, ['kdg', seconds])
+
+
+def gut_gemacht(seconds = 1):
+    send(goodPorts, ['kgdb', seconds])
+
+
+def high_five(seconds = 1):
+    send(goodPorts, ['kfiv', seconds])
+
+
+def handstand(seconds = 1):
+    send(goodPorts, ['khds', seconds])
+
+
+def umarmen(seconds = 1):
+    send(goodPorts, ['khg', seconds])
+
+
+def pipi(seconds = 1):
+    send(goodPorts, ['kpee', seconds])
+
+
+def hand_geben(seconds = 1):
+    send(goodPorts, ['khsk', seconds])
+
+def hallo(seconds = 1):
+    send(goodPorts, ['khi', seconds])
+
+
+def haende_hoch(seconds = 1):
+    send(goodPorts, ['khu', seconds])
+
+
+def kick(seconds = 1):
+    send(goodPorts, ['kkc', seconds])
+
+
+def nicken(seconds = 1):
+    send(goodPorts, ['knd', seconds])
+
+
+def tot(seconds = 1):
+    send(goodPorts, ['kpd', seconds])
+
+
+def liegestütze(seconds = 1):
+    send(goodPorts, ['kpu', seconds])
+
+
+def aufstehen(seconds = 1):
+    send(goodPorts, ['krc', seconds])
+
+
+def kratzen(seconds = 1):
+    send(goodPorts, ['kscrh', seconds])
+
+
+def niesen(seconds = 1):
+    send(goodPorts, ['ksnf', seconds])
+
+
+def tisch(seconds = 1):
+    send(goodPorts, ['ktbl', seconds])
+
+
+def kopf_schuetteln(seconds = 1):
+    send(goodPorts, ['kwh', seconds])
 
 
 # the following skill arrays are identical to those in InstinctBittle.h
@@ -372,30 +500,31 @@ if __name__ == '__main__':
             send(goodPorts, task)
         """
         # stand up
-        send(goodPorts, steh)
+        steh()
 
         while True:
             # get ultrasonic distance
             distance = getUltrasonicDistance()
             if distance != "":
                 if distance <= 5:
-                    send(goodPorts, rot)
-                    send(goodPorts, sitz)
+                    augenfarbe("rot")
+                    sitz()
                 elif distance <= 10:
-                    send(goodPorts, lila)
+                    augenfarbe("lila")
                 elif distance <= 15:
-                    send(goodPorts, blau)
+                    augenfarbe("blau")
                 elif distance <= 20:
-                    send(goodPorts, gruen)
+                    augenfarbe("gruen")
                 else:
-                    send(goodPorts, weiss)
-                    send(goodPorts, steh)
-                print("got distance")
+                    augenfarbe("weiss")
+                    steh()
+                print("got distance:" + distance + " cm")
             else:
                 print("got no distance!")
 
     except Exception as e:
         logger.info("Exception")
+        print(e)
         closeAllSerial(goodPorts)
         os._exit(0)
         raise e
