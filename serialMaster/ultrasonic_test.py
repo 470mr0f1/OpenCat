@@ -28,18 +28,18 @@ weiss = ['C',[127, 127, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
 
 steh = ['kbalance', 1]
 sitz = ['ksit', 1]
-lauf_vorwärts = ['kwkF', 1]
+lauf_vorwaerts = ['kwkF', 1]
 lauf_links = ['kwkL', 1]
 lauf_rechts = ['kwkR', 1]
-lauf_rückwaerts = ['kbk', 1]
-lauf_rückwaerts_links = ['kbkL', 1]
-lauf_rückwaerts_rechts = ['kbkR', 1]
+lauf_rueckwaerts = ['kbk', 1]
+lauf_rueckwaerts_links = ['kbkL', 1]
+lauf_rueckwaerts_rechts = ['kbkR', 1]
 popo_hoch = ['kbuttUp', 1]
 auf_knien = ['kcalib', 1]
-krabbel_vorwärts = ['kcrF', 1]
+krabbel_vorwaerts = ['kcrF', 1]
 krabbel_links = ['kcrL', 1]
 krabbel_links = ['kcrR', 1]
-renn_vorwärts = ['ktrF', 1]
+renn_vorwaerts = ['ktrF', 1]
 renn_links = ['ktrL', 1]
 renn_rechts = ['ktrR', 1]
 hinten_knien = ['kdropped', 1]
@@ -59,7 +59,7 @@ umarmen = ['khg', 1]
 pipi = ['kpee', 1]
 hand_geben = ['khsk', 1]
 hallo = ['khi', 1]
-hände_hoch = ['khu', 1]
+haende_hoch = ['khu', 1]
 kick = ['kkc', 1]
 nicken = ['knd', 1]
 tot = ['kpd', 1]
@@ -68,7 +68,7 @@ aufstehen = ['krc', 1]
 kratzen = ['kscrh', 1]
 niesen = ['ksnf', 1]
 tisch = ['ktbl', 1]
-kopf_schütteln = ['kwh', 1]
+kopf_schuetteln = ['kwh', 1]
 
 
 
@@ -372,24 +372,27 @@ if __name__ == '__main__':
             send(goodPorts, task)
         """
         # stand up
-        send(goodPorts, ['kbalance', 1])
+        send(goodPorts, steh)
 
         while True:
             # get ultrasonic distance
             distance = getUltrasonicDistance()
             if distance != "":
                 if distance <= 5:
-                    send(goodPorts, ['C',[127, 0, 0, E_RGB_ALL, E_EFFECT_NONE], 1])
-                    send(goodPorts, ['K', sit, 1])
+                    send(goodPorts, rot)
+                    send(goodPorts, sitz)
                 elif distance <= 10:
-                    send(goodPorts, ['C',[127, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1])
+                    send(goodPorts, lila)
                 elif distance <= 15:
-                    send(goodPorts, ['C',[0, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1])
+                    send(goodPorts, blau)
                 elif distance <= 20:
-                    send(goodPorts, ['C',[0, 127, 0, E_RGB_ALL, E_EFFECT_NONE], 1])
+                    send(goodPorts, gruen)
                 else:
-                    send(goodPorts, ['C',[127, 127, 127, E_RGB_ALL, E_EFFECT_NONE], 1])
-                    send(goodPorts, ['kbalance', 1])
+                    send(goodPorts, weiss)
+                    send(goodPorts, steh)
+                print("got distance")
+            else:
+                print("got no distance!")
 
     except Exception as e:
         logger.info("Exception")
