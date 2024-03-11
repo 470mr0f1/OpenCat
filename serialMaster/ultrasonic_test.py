@@ -4,6 +4,78 @@
 import sys
 sys.path.append("..")
 from ardSerial import *
+
+E_RGB_ALL = 0
+E_RGB_RIGHT = 1
+E_RGB_LEFT = 2
+
+E_EFFECT_BREATHING = 0
+E_EFFECT_ROTATE = 1
+E_EFFECT_FLASH = 2
+E_EFFECT_NONE = 3
+
+# colors for easy use
+rot = ['C',[127, 0, 0, E_RGB_ALL, E_EFFECT_NONE], 1]
+lila = ['C',[127, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
+blau = ['C',[0, 0, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
+gruen = ['C',[0, 127, 0, E_RGB_ALL, E_EFFECT_NONE], 1]
+weiss = ['C',[127, 127, 127, E_RGB_ALL, E_EFFECT_NONE], 1]
+
+# moves for easy use
+
+# don't know what they are doing
+#bd, vtF, vtL, lu, up, zero, stand, wsf
+
+steh = ['kbalance', 1]
+sitz = ['ksit', 1]
+lauf_vorwärts = ['kwkF', 1]
+lauf_links = ['kwkL', 1]
+lauf_rechts = ['kwkR', 1]
+lauf_rückwaerts = ['kbk', 1]
+lauf_rückwaerts_links = ['kbkL', 1]
+lauf_rückwaerts_rechts = ['kbkR', 1]
+popo_hoch = ['kbuttUp', 1]
+auf_knien = ['kcalib', 1]
+krabbel_vorwärts = ['kcrF', 1]
+krabbel_links = ['kcrL', 1]
+krabbel_links = ['kcrR', 1]
+renn_vorwärts = ['ktrF', 1]
+renn_links = ['ktrL', 1]
+renn_rechts = ['ktrR', 1]
+hinten_knien = ['kdropped', 1]
+vorne_hoch = ['klifted', 1]
+ausruhen = ['krest', 1]
+strecken = ['kstr', 1]
+sauer = ['kang', 1]
+boxen = ['kbx', 1]
+jubeln = ['kchr', 1]
+check = ['kck', 1]
+komm_her = ['kcmh', 1]
+graben = ['kdg', 1]
+gut_gemacht = ['kgdb', 1]
+high_five = ['kfiv', 1]
+handstand = ['khds', 1]
+umarmen = ['khg', 1]
+pipi = ['kpee', 1]
+hand_geben = ['khsk', 1]
+hallo = ['khi', 1]
+hände_hoch = ['khu', 1]
+kick = ['kkc', 1]
+nicken = ['knd', 1]
+tot = ['kpd', 1]
+liegestütze = ['kpu', 1]
+aufstehen = ['krc', 1]
+kratzen = ['kscrh', 1]
+niesen = ['ksnf', 1]
+tisch = ['ktbl', 1]
+kopf_schütteln = ['kwh', 1]
+
+
+
+
+
+
+
 # the following skill arrays are identical to those in InstinctBittle.h
 sit = [
 1, 0, -30, 1,
@@ -127,15 +199,6 @@ wkF = [
 
 model = 'Nybble'
 postureTable = postureDict[model]
-
-E_RGB_ALL = 0
-E_RGB_RIGHT = 1
-E_RGB_LEFT = 2
-
-E_EFFECT_BREATHING = 0
-E_EFFECT_ROTATE = 1
-E_EFFECT_FLASH = 2
-E_EFFECT_NONE = 3
 
 
 def getUltrasonicDistance():
